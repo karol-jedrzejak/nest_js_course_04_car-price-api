@@ -1,10 +1,19 @@
-### Create New User
+### Sign Up (Create New User)
 POST http://localhost:3000/auth/signup
 content-type: application/json
 
 {
-  "email": "karol2@lolczak.com",
-  "password": "jakiesuperhaslo2"
+  "email": "kj3@gmail.com",
+  "password": "dupadupa3"
+}   
+
+### Sign in (Login - Authenticate User and Get Session)
+POST http://localhost:3000/auth/signin
+content-type: application/json
+
+{
+  "email": "kj@gmail.com",
+  "password": "dupadupa"
 }   
 
 
