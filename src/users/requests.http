@@ -3,8 +3,8 @@ POST http://localhost:3000/auth/signup
 content-type: application/json
 
 {
-  "email": "kj3@gmail.com",
-  "password": "dupadupa3"
+  "email": "kj4@gmail.com",
+  "password": "dupadupa4"
 }   
 
 ### Sign in (Login - Authenticate User and Get Session)
@@ -16,6 +16,13 @@ content-type: application/json
   "password": "dupadupa"
 }   
 
+### Sign Out (Destroy Session)
+POST http://localhost:3000/auth/signout
+
+### Check if session is working (Get Current User)
+GET http://localhost:3000/auth/whoami
+
+----------------------------------------------------------------------------------------
 
 ### Get User by id
 GET http://localhost:3000/auth/4 
