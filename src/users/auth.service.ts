@@ -30,13 +30,13 @@ export class AuthService {
     async signin(email: string, password: string) {
         const [user] = await this.usersService.find(email);
         if (!user) {
-            throw new NotFoundException('invalid credentials');
+            throw new NotFoundException('invalid credentials (email)');
         }
             
         const [salt, storedHash] = user.password.split('.');
         const hash = (await scrypt(password, salt, 32)) as Buffer;
         if (hash.toString('hex') !== storedHash) {
-            throw new NotFoundException('invalid credentials');
+            throw new NotFoundException('invalid credentials (pass)');
         }   
         return user;
     }   

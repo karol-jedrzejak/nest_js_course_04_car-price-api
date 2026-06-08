@@ -4,7 +4,7 @@ content-type: application/json
 
 {
   "email": "kj4@gmail.com",
-  "password": "dupadupa4"
+  "password": "test2"
 }   
 
 ### Sign in (Login - Authenticate User and Get Session)
@@ -12,8 +12,8 @@ POST http://localhost:3000/auth/signin
 content-type: application/json
 
 {
-  "email": "kj@gmail.com",
-  "password": "dupadupa"
+  "email": "kj4@gmail.com",
+  "password": "test2"
 }   
 
 ### Sign Out (Destroy Session)

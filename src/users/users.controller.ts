@@ -57,8 +57,8 @@ export class UsersController {
     }
 
     @Get('/:id')
-    findUser(@Param('id') id: string) {
-        const user = this.usersService.findOne(parseInt(id));
+    async findUser(@Param('id') id: string) {
+        const user = await this.usersService.findOne(parseInt(id));
         if (!user) {
             throw new NotFoundException('User not found');
         }
@@ -66,8 +66,8 @@ export class UsersController {
     }
 
     @Patch('/:id')
-    updateUser(@Param('id') id: string, @Body() body: UpdateUserDto) {
-        return this.usersService.update(parseInt(id), body);
+    async updateUser(@Param('id') id: string, @Body() body: UpdateUserDto) {
+        return await this.usersService.update(parseInt(id), body);
     }
 
     @Delete('/:id')
