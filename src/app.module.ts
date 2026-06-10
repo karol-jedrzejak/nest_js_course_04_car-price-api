@@ -1,6 +1,7 @@
 import { Module,ValidationPipe,MiddlewareConsumer } from '@nestjs/common';
 import { APP_PIPE } from '@nestjs/core';
 import { TypeOrmModule } from '@nestjs/typeorm';
+import { ConfigModule, ConfigService } from '@nestjs/config';
 import { AppController } from './app.controller';
 import { AppService } from './app.service';
 import { UsersModule } from './users/users.module';
@@ -10,12 +11,29 @@ import { Report } from './reports/report.entity';
 const cookieSession = require('cookie-session');
 
 @Module({
-  imports: [TypeOrmModule.forRoot({
+  imports: [ConfigModule.forRoot({
+    isGlobal: true,
+    envFilePath: `.env.${process.env.NODE_ENV}`
+  }),
+  TypeOrmModule.forRootAsync({
+    imports: [ConfigModule],
+    inject: [ConfigService],
+    useFactory: (config: ConfigService) => {
+      return {
+        type: 'better-sqlite3',
+        database: config.get<string>('DB_NAME'),
+        entities: [User, Report],
+        synchronize: true,
+      }
+    }}),
+/*   TypeOrmModule.forRoot({
     type: 'better-sqlite3',
-    database: 'db.sqlite',
+    database: ConfigService.apply(null, [new ConfigService()]).get('DB_NAME'),
     entities: [User, Report],
     synchronize: true,
-  }), UsersModule, ReportsModule],
+  }), */
+  UsersModule,
+  ReportsModule],
   controllers: [AppController],
   providers: [
     AppService,

@@ -1,3 +1,10 @@
 /db.sqlite
 /dist
 /node_modules
+.env.development
+.env.production
+.env.tests
+.DS_Store
+.idea
+.vscode
+*.sqlite
