@@ -15,10 +15,11 @@ describe('AuthenticationSystem (e2e)', () => {
     app = moduleFixture.createNestApplication();
     await app.init();
   });
-21
+
+
   it('handles a successful signup request', () => {
-    const email = 'teseterer@email.pl';
-    const password = 'passtest';
+    const email = 'jakis_koles@email.pl';
+    const password = 'passtest2';
     return request(app.getHttpServer())
       .post('/auth/signup')
       .send({ email: email, password: password })
@@ -33,4 +34,25 @@ describe('AuthenticationSystem (e2e)', () => {
   afterEach(async () => {
     await app.close();
   });
+
+  it('signup as a new user then get the currently logged in user', async () => {
+    const email = 'jakis_koles_2@poczta.fm';
+    const password = 'passtest2';
+
+    const res = await request(app.getHttpServer())
+      .post('/auth/signup')
+      .send({ email: email, password: password });
+
+      console.log(res.body);
+      console.log(res);
+      //.expect(201);
+
+    const cookie = res.get('Set-Cookie');
+
+    const { body } = await request(app.getHttpServer())
+      .get('/auth/whoami')
+      .set('Cookie', cookie!)
+      .expect(200);
+    expect(body.email).toEqual(email);
+    });
 });
