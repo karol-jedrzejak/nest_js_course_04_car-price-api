@@ -5,9 +5,22 @@ content-type: application/json
 {
     "make": "dodge",
     "model": "viper",
-    "year": 1989,
-    "lng": 5,
-    "lat": 5,
-    "mileage": 300000,
-    "price": 180000
+    "year": 1990,
+    "lng": 15,
+    "lat": 15,
+    "mileage": 150000,
+    "price": 300000
 }   
+
+### Approve Report
+PATCH http://localhost:3000/reports/4
+content-type: application/json
+
+{
+    "approved": true
+}   
+
+
+### Get Estimate
+GET http://localhost:3000/reports?make=toyota&model=viper&year=1980&lng=15&lat=15&mileage=150000&price=300000
+content-type: application/json
