@@ -6,6 +6,7 @@ import {
     IsLongitude,
     IsLatitude
 } from 'class-validator';
+import { User } from '../../users/user.entity';
 
 export class CreateReportDTO {
 
@@ -35,4 +36,6 @@ export class CreateReportDTO {
     @Min(0)
     @Max(1000000)
     price!: number;
+
+    user!: User;
 }

@@ -1,0 +1,13 @@
+### Add Report
+POST http://localhost:3000/reports
+content-type: application/json
+
+{
+    "make": "dodge",
+    "model": "viper",
+    "year": 1989,
+    "lng": 5,
+    "lat": 5,
+    "mileage": 300000,
+    "price": 180000
+}   
