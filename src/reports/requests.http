@@ -22,5 +22,5 @@ content-type: application/json
 
 
 ### Get Estimate
-GET http://localhost:3000/reports?make=toyota&model=viper&year=1980&lng=15&lat=15&mileage=150000&price=300000
+GET http://localhost:3000/reports?make=dodge&model=viper&year=1990&lng=10&lat=10&mileage=150000
 content-type: application/json
