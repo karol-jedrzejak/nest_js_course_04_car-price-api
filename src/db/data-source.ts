@@ -14,7 +14,11 @@ const dbConfig: DataSourceOptions = {
       ? ['src/**/*.entity.ts']
       : ['dist/**/*.entity.js'],
 
-  migrations: ['migrations/*.ts'],
+  migrations: ['src/migrations/*.js'],
+  migrationsRun:
+    process.env.NODE_ENV === 'test'
+      ? true
+      : false,
   synchronize: false,
 };
 

@@ -1,6 +1,6 @@
 var dbConfig = {
     synchronize: false,
-    migrations: ['migrations/*.js'],
+    migrations: ['src/migrations/*.js'],
     cli: {
         migrationsDir: 'migrations',
     }
@@ -19,6 +19,7 @@ switch(process.env.NODE_ENV){
             type: 'better-sqlite3',
             database: 'test.sqlite',
             entities: ['**/*.entity.ts'],
+            migrationsRun: true,
         });
         break;
     case 'production':

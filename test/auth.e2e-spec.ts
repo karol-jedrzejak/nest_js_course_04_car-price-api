@@ -43,10 +43,6 @@ describe('AuthenticationSystem (e2e)', () => {
       .post('/auth/signup')
       .send({ email: email, password: password });
 
-      console.log(res.body);
-      console.log(res);
-      //.expect(201);
-
     const cookie = res.get('Set-Cookie');
 
     const { body } = await request(app.getHttpServer())
