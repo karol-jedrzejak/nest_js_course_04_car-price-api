@@ -8,6 +8,8 @@ import { UsersModule } from './users/users.module';
 import { ReportsModule } from './reports/reports.module';
 import { User } from './users/user.entity';
 import { Report } from './reports/report.entity';
+import dbConfig from '../ormconfig.js'
+
 const cookieSession = require('cookie-session');
 
 @Module({
@@ -15,7 +17,11 @@ const cookieSession = require('cookie-session');
     isGlobal: true,
     envFilePath: `.env.${process.env.NODE_ENV}`
   }),
-  TypeOrmModule.forRootAsync({
+/*   TypeOrmModule.forRootAsync({
+    useFactory: () => dbConfig,
+  }), */
+  TypeOrmModule.forRoot(dbConfig),
+/*    TypeOrmModule.forRootAsync({
     imports: [ConfigModule],
     inject: [ConfigService],
     useFactory: (config: ConfigService) => {
@@ -25,7 +31,7 @@ const cookieSession = require('cookie-session');
         entities: [User, Report],
         synchronize: true,
       }
-    }}),
+    }}),  */
 /*   TypeOrmModule.forRoot({
     type: 'better-sqlite3',
     database: ConfigService.apply(null, [new ConfigService()]).get('DB_NAME'),
@@ -46,9 +52,12 @@ const cookieSession = require('cookie-session');
   ],
 })
 export class AppModule {
+  constructor(
+    private configService: ConfigService
+  ) {}
   configure(consumer: MiddlewareConsumer) {
     consumer.apply(cookieSession({
-    keys: ['as6dfas3dfsadf1']
+    keys: [this.configService.get('COOKIE_KEY')]
   })).forRoutes('*');
   }
 }
